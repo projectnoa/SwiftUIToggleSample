@@ -23,20 +23,35 @@ final class SwiftUIToggleSampleUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testTogglesRespondCorrectly() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+        // Get all toggles visible in the current view.
+        let toggles = app.switches
+        // Wait one second
+        sleep(1)
+        // Execute UI action
+        toggles["AJourneyForWisdom"].tap()
+        toggles["QueenQuirks"].tap()
+        // Wait one second
+        sleep(1)
+        // Assert your assumptions
+        XCTAssertEqual((toggles["AJourneyForWisdom"].value != nil), true, "Toggle is not responding!")
+        XCTAssertEqual((toggles["QueenQuirks"].value != nil), true, "Toggle is not responding!")
+        // Execute UI action
+        toggles["FollowAll"].tap()
+        // Wait one second
+        sleep(1)
+        // Assert your assumptions
+        XCTAssertEqual((toggles["Pewdipie"].value != nil), true, "Toggle is not responding!")
+        XCTAssertEqual((toggles["Markiplier"].value != nil), true, "Toggle is not responding!")
+        XCTAssertEqual((toggles["AJourneyForWisdom"].value != nil), true, "Toggle is not responding!")
+        XCTAssertEqual((toggles["GameTheory"].value != nil), true, "Toggle is not responding!")
+        XCTAssertEqual((toggles["QueenQuirks"].value != nil), true, "Toggle is not responding!")
+        // Assert your assumptions
+        XCTAssertEqual((toggles["FollowAll"].value != nil), true, "Toggle is not responding!")
+        // Wait one second
+        sleep(1)
     }
 }
